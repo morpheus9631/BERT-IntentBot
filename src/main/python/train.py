@@ -10,10 +10,9 @@ import torch
 import joblib
 
 from sklearn.preprocessing import LabelEncoder
-from torch.utils.data import DataLoader, Dataset, random_split
+from torch.utils.data import DataLoader, random_split
 from transformers import BertTokenizer, BertForSequenceClassification, AdamW
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
-from typing import Dict, List, Tuple, Union
+from typing import List, Tuple, Union
 
 from pandas import DataFrame
 from wordcloud import WordCloud
@@ -22,13 +21,11 @@ from utils import PathUtil
 
 # -----------------------------------------------------------------------------
 
-def data_preparation():
+def data_preparation(data_pathfile: str):
 
-    parent_path = PathUtil.get_parent_path(__file__)
-    in_pathfile = os.path.join(parent_path, 'intents.json')
-
-    with open(in_pathfile, 'r') as in_file:
+    with open(data_pathfile, 'r', encoding="utf-8") as in_file:
         data = json.load(in_file)
+        
     in_df = pd.DataFrame(data['intents'])
     
     dic = {"tag":[], "patterns":[], "responses":[]}
@@ -215,16 +212,13 @@ def tokenize_text(
 
 # -----------------------------------------------------------------------------
 
-
 def encode_texts(tokenizer: BertTokenizer, texts: list, max_len):
     
     input_ids = []
     attention_masks = []
     
     for text in texts:
-
         encoded_dict = tokenize_text(text, tokenizer, max_len)
-
         input_ids.append(encoded_dict['input_ids'])
         attention_masks.append(encoded_dict['attention_mask'])
     
@@ -236,11 +230,10 @@ def load_label_encoder(labels: Union[List[str], np.ndarray]) -> LabelEncoder:
     
     label_encoder = LabelEncoder()
     label_encoder.fit(labels)
-    
     num_labels = len(label_encoder.classes_)
     
     return label_encoder, num_labels
-   
+
 # -----------------------------------------------------------------------------
 
 def prepare_data(
@@ -417,7 +410,12 @@ def train_model(
 
 # -----------------------------------------------------------------------------
 
-def predict_intent(text: str, tokenizer: BertTokenizer, max_len) -> Tuple:
+def predict_intent(
+    text: str, 
+    model: BertForSequenceClassification, 
+    tokenizer: BertTokenizer, 
+    max_len
+) -> Tuple:
 
     # Tokenize and encode the text for BERT
     encoded_dict = tokenize_text(text, tokenizer, max_len)
@@ -442,8 +440,9 @@ def predict_intent(text: str, tokenizer: BertTokenizer, max_len) -> Tuple:
     
     # Decode the predicted label
     predicted_label = label_encoder.inverse_transform(predicted_label_idx)[0]
+    predicted_prob  = float(probabilities[0][predicted_label_idx].item())
     
-    return predicted_label, probabilities[0][predicted_label_idx]    
+    return predicted_label, predicted_prob
     
 # -----------------------------------------------------------------------------
 
@@ -452,16 +451,18 @@ if __name__ == "__main__":
 
     # Ptahs
     root_path = PathUtil.get_root_path()
+    datasets_path = os.path.join(root_path, 'datasets')
     saved_model_path = os.path.join(root_path, 'saved_model')
     
     # model version
     version = str(int(time.time()))
-    model_dir = f"mental_health_chat_{version}"
+    model_dir = f"model_{version}"
     best_model_path = os.path.join(saved_model_path, model_dir)
     PathUtil.ensure_path_exists(best_model_path)
 
     # Prepare data
-    df_data = data_preparation()
+    data_pathfile = os.path.join(datasets_path, 'intents.json')
+    df_data = data_preparation(data_pathfile)
 
     # Preprocessing the dataset
     df_data['patterns'] = df_data['patterns'].apply(preprocess_text)
@@ -472,15 +473,15 @@ if __name__ == "__main__":
     print(df_data.head(3))
     
     # Exploratory Data Analysis
-    plot_path = os.path.join(root_path, 'src/main/python/example1')
+    plot_path = os.path.join(root_path, 'outputs')
     PathUtil.ensure_path_exists(plot_path)
     
     # Exploratory Data Analysis
-    # plot_word_cloud(df_data, plot_path)
-    # plot_patterns_len_dist(df_data, plot_path)
-    # plot_intents_dist(df_data, plot_path)
-    # plot_num_unique_responses_per_intent(df_data, plot_path)
-    # plot_response_len_dist(df_data, plot_path)
+    plot_word_cloud(df_data, plot_path)
+    plot_patterns_len_dist(df_data, plot_path)
+    plot_intents_dist(df_data, plot_path)
+    plot_num_unique_responses_per_intent(df_data, plot_path)
+    plot_response_len_dist(df_data, plot_path)
     
     # Load tokenizer, label_encoder
     tokenizer = load_tokenizer()
@@ -493,10 +494,10 @@ if __name__ == "__main__":
     model, optimizer = build_model(num_labels)
     
     # Train model
-    device = torch.device("cuda:3" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    epochs  = 50
-    max_len = 128
+    epochs  = 100
+    max_len = 256
     patience = 5
     train_ratio = 0.8
     
@@ -516,7 +517,8 @@ if __name__ == "__main__":
     
     # Predict intent
     text = "I feel anxious today"
-    predicted_intent = predict_intent(text, tokenizer, max_len)
-    print(f"Predicted Intent: {predicted_intent}")
+    intent, prob = predict_intent(text, model, tokenizer, max_len)
+    print(f"Predicted Intent: {intent}")
+    print(f"Probability: {prob:.4f}")
     
     

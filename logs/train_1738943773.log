@@ -1,0 +1,81 @@
+Initial data count: tag          232
+patterns     232
+responses    232
+dtype: int64
+        tag         patterns                                          responses
+0  greeting               hi  [Hello there. Tell me how are you feeling toda...
+1  greeting              hey  [Hello there. Tell me how are you feeling toda...
+2  greeting  is anyone there  [Hello there. Tell me how are you feeling toda...
+
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at bert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+
+Strain training ...
+Epoch   1 - accuracy: 0.0108, loss: 3.9316 - val_accuracy: 0.0000, val_loss: 3.8639, Best model saved
+Epoch   2 - accuracy: 0.0973, loss: 3.7356 - val_accuracy: 0.1277, val_loss: 3.7412, Best model saved
+Epoch   3 - accuracy: 0.2162, loss: 3.4781 - val_accuracy: 0.1915, val_loss: 3.4431, Best model saved
+Epoch   4 - accuracy: 0.2649, loss: 3.2666 - val_accuracy: 0.1702, val_loss: 3.2064, Best model saved
+Epoch   5 - accuracy: 0.2270, loss: 3.0870 - val_accuracy: 0.2553, val_loss: 2.9332, Best model saved
+Epoch   6 - accuracy: 0.3135, loss: 2.8871 - val_accuracy: 0.2979, val_loss: 2.8661, Best model saved
+Epoch   7 - accuracy: 0.3676, loss: 2.7600 - val_accuracy: 0.3830, val_loss: 2.6455, Best model saved
+Epoch   8 - accuracy: 0.4649, loss: 2.6630 - val_accuracy: 0.5532, val_loss: 2.3791, Best model saved
+Epoch   9 - accuracy: 0.4811, loss: 2.5482 - val_accuracy: 0.5957, val_loss: 2.2404, Best model saved
+Epoch  10 - accuracy: 0.5892, loss: 2.3992 - val_accuracy: 0.6809, val_loss: 2.1757, Best model saved
+Epoch  11 - accuracy: 0.6324, loss: 2.2171 - val_accuracy: 0.7660, val_loss: 2.1468, Best model saved
+Epoch  12 - accuracy: 0.7135, loss: 2.1364 - val_accuracy: 0.7447, val_loss: 1.9633, Best model saved
+Epoch  13 - accuracy: 0.7081, loss: 2.0585 - val_accuracy: 0.8723, val_loss: 1.7800, Best model saved
+Epoch  14 - accuracy: 0.7568, loss: 1.9055 - val_accuracy: 0.8298, val_loss: 1.8269
+Epoch  15 - accuracy: 0.7730, loss: 1.7846 - val_accuracy: 0.8085, val_loss: 1.6946, Best model saved
+Epoch  16 - accuracy: 0.8270, loss: 1.7544 - val_accuracy: 0.8511, val_loss: 1.4126, Best model saved
+Epoch  17 - accuracy: 0.8432, loss: 1.6536 - val_accuracy: 0.9149, val_loss: 1.2584, Best model saved
+Epoch  18 - accuracy: 0.8811, loss: 1.4871 - val_accuracy: 0.8298, val_loss: 1.4838
+Epoch  19 - accuracy: 0.8649, loss: 1.4376 - val_accuracy: 0.8936, val_loss: 1.2664
+Epoch  20 - accuracy: 0.9027, loss: 1.3415 - val_accuracy: 0.9149, val_loss: 1.2102, Best model saved
+Epoch  21 - accuracy: 0.8919, loss: 1.3392 - val_accuracy: 1.0000, val_loss: 0.9607, Best model saved
+Epoch  22 - accuracy: 0.9135, loss: 1.2254 - val_accuracy: 0.9787, val_loss: 1.0093
+Epoch  23 - accuracy: 0.9514, loss: 1.1379 - val_accuracy: 0.9362, val_loss: 0.9931
+Epoch  24 - accuracy: 0.9351, loss: 1.0820 - val_accuracy: 0.9787, val_loss: 0.9358, Best model saved
+Epoch  25 - accuracy: 0.9243, loss: 1.0802 - val_accuracy: 1.0000, val_loss: 0.8056, Best model saved
+Epoch  26 - accuracy: 0.9622, loss: 1.0122 - val_accuracy: 0.9787, val_loss: 0.8537
+Epoch  27 - accuracy: 0.9784, loss: 0.9296 - val_accuracy: 0.9787, val_loss: 0.7974, Best model saved
+Epoch  28 - accuracy: 0.9676, loss: 0.8846 - val_accuracy: 1.0000, val_loss: 0.7829, Best model saved
+Epoch  29 - accuracy: 0.9730, loss: 0.8386 - val_accuracy: 1.0000, val_loss: 0.7346, Best model saved
+Epoch  30 - accuracy: 0.9784, loss: 0.7739 - val_accuracy: 1.0000, val_loss: 0.7315, Best model saved
+Epoch  31 - accuracy: 0.9892, loss: 0.7737 - val_accuracy: 1.0000, val_loss: 0.6154, Best model saved
+Epoch  32 - accuracy: 0.9838, loss: 0.7123 - val_accuracy: 1.0000, val_loss: 0.5901, Best model saved
+Epoch  33 - accuracy: 1.0000, loss: 0.6616 - val_accuracy: 0.9787, val_loss: 0.7179
+Epoch  34 - accuracy: 0.9946, loss: 0.6272 - val_accuracy: 1.0000, val_loss: 0.6319
+Epoch  35 - accuracy: 0.9892, loss: 0.6431 - val_accuracy: 1.0000, val_loss: 0.4363, Best model saved
+Epoch  36 - accuracy: 0.9892, loss: 0.6077 - val_accuracy: 0.9787, val_loss: 0.4387
+Epoch  37 - accuracy: 0.9838, loss: 0.5528 - val_accuracy: 1.0000, val_loss: 0.5131
+Epoch  38 - accuracy: 0.9946, loss: 0.5435 - val_accuracy: 1.0000, val_loss: 0.4354, Best model saved
+Epoch  39 - accuracy: 0.9946, loss: 0.5294 - val_accuracy: 0.9787, val_loss: 0.3601, Best model saved
+Epoch  40 - accuracy: 0.9946, loss: 0.4838 - val_accuracy: 1.0000, val_loss: 0.4213
+Epoch  41 - accuracy: 0.9946, loss: 0.4583 - val_accuracy: 0.9787, val_loss: 0.4151
+Epoch  42 - accuracy: 0.9946, loss: 0.4352 - val_accuracy: 1.0000, val_loss: 0.4069
+Epoch  43 - accuracy: 1.0000, loss: 0.4319 - val_accuracy: 0.9787, val_loss: 0.3793
+Epoch  44 - accuracy: 0.9946, loss: 0.4144 - val_accuracy: 1.0000, val_loss: 0.3438, Best model saved
+Epoch  45 - accuracy: 0.9892, loss: 0.4253 - val_accuracy: 1.0000, val_loss: 0.2714, Best model saved
+Epoch  46 - accuracy: 0.9946, loss: 0.4022 - val_accuracy: 1.0000, val_loss: 0.2363, Best model saved
+Epoch  47 - accuracy: 1.0000, loss: 0.3516 - val_accuracy: 0.9787, val_loss: 0.3520
+Epoch  48 - accuracy: 0.9946, loss: 0.3521 - val_accuracy: 1.0000, val_loss: 0.2857
+Epoch  49 - accuracy: 0.9946, loss: 0.3261 - val_accuracy: 1.0000, val_loss: 0.2963
+Epoch  50 - accuracy: 0.9946, loss: 0.3239 - val_accuracy: 1.0000, val_loss: 0.2992
+Epoch  51 - accuracy: 0.9892, loss: 0.3329 - val_accuracy: 1.0000, val_loss: 0.2118, Best model saved
+Epoch  52 - accuracy: 0.9946, loss: 0.3132 - val_accuracy: 1.0000, val_loss: 0.1601, Best model saved
+Epoch  53 - accuracy: 0.9892, loss: 0.3006 - val_accuracy: 1.0000, val_loss: 0.1809
+Epoch  54 - accuracy: 0.9892, loss: 0.2819 - val_accuracy: 1.0000, val_loss: 0.2195
+Epoch  55 - accuracy: 0.9946, loss: 0.2591 - val_accuracy: 1.0000, val_loss: 0.2460
+Epoch  56 - accuracy: 0.9946, loss: 0.2796 - val_accuracy: 1.0000, val_loss: 0.1371, Best model saved
+Epoch  57 - accuracy: 1.0000, loss: 0.2460 - val_accuracy: 0.9787, val_loss: 0.2134
+Epoch  58 - accuracy: 0.9892, loss: 0.2536 - val_accuracy: 1.0000, val_loss: 0.1683
+Epoch  59 - accuracy: 0.9892, loss: 0.2419 - val_accuracy: 1.0000, val_loss: 0.1561
+Epoch  60 - accuracy: 0.9946, loss: 0.2240 - val_accuracy: 0.9787, val_loss: 0.2046
+Epoch  61 - accuracy: 1.0000, loss: 0.2234 - val_accuracy: 0.9787, val_loss: 0.1684
+
+
+Early stopping triggered after 61 epochs!
+
+Training time: 897.16 secs
+Predicted Intent: anxious
+Probability: 0.5062
